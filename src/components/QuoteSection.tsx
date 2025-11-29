@@ -37,35 +37,13 @@ function QuoteSection({
 
   function handleQuoteForm(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
-
-    async function postQuote() {
-      try {
-        const response = await fetch("/api/post", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(form),
-        });
-        const result = await response.json();
-        setQuotes((prev) => [...(prev || []), result[0]]);
-        setQuote(result[0]);
-        resetProcess("add");
-      } catch (error) {
-        if (quotes) {
-          const id = quotes.length + 1;
-          const updatedForm = { ...form, id: id };
-          setQuotes([...quotes, updatedForm]);
-          setQuote(updatedForm);
-          resetProcess("add");
-        }
-        console.log(
-          "Det finns ingen databas att koppla upp till, inga ändringar sparas",
-          error
-        );
-      }
+    if (quotes) {
+      const id = quotes.length + 1;
+      const updatedForm = { ...form, id: id };
+      setQuotes([...quotes, updatedForm]);
+      setQuote(updatedForm);
+      resetProcess("add");
     }
-    postQuote();
   }
 
   const handleChange = (
@@ -79,77 +57,31 @@ function QuoteSection({
 
   function sendUpdate(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
+    if (quotes) {
+      const quoteToUpdate = quotes.find(
+        (quoteToUpdate) => quoteToUpdate.name === quote?.name
+      );
+      if (quoteToUpdate) {
+        quoteToUpdate.quote = form.quote;
+        quoteToUpdate.name = form.name;
 
-    async function updateQuote() {
-      try {
-        const response = await fetch(`/api/put/${quote?.id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(form),
-        });
-        const result = await response.json();
-        setQuotes(result[0]);
-        resetProcess("update");
-      } catch (error) {
-        if (quotes) {
-          const quoteToUpdate = quotes.find(
-            (quoteToUpdate) => quoteToUpdate.name === quote?.name
-          );
-          if (quoteToUpdate) {
-            quoteToUpdate.quote = form.quote;
-            quoteToUpdate.name = form.name;
-
-            const updatedArray = quotes.filter(
-              (quote) => quote.id !== quoteToUpdate.id
-            );
-
-            updatedArray.push(quoteToUpdate);
-            setQuotes(updatedArray);
-            resetProcess("update");
-          }
-        }
-        resetProcess("update");
-        console.log(
-          "Det finns ingen databas att koppla upp till, inga ändringar sparas",
-          error
+        const updatedArray = quotes.filter(
+          (quote) => quote.id !== quoteToUpdate.id
         );
+
+        updatedArray.push(quoteToUpdate);
+        setQuotes(updatedArray);
+        resetProcess("update");
       }
     }
-
-    updateQuote();
   }
 
   function handleDelete(): void {
-    setInProgress(quote ? quote.id : null);
-
-    async function deleteQuote() {
-      const response = await fetch(`/api/delete/${quote?.id}`, {
-        method: "DELETE",
-      });
-      if (response.ok) {
-        setInProgress(null);
-        setQuote(null);
-        const updatedArray = quotes
-          ? quotes.filter((quotesToFilter) => quotesToFilter.id !== quote?.id)
-          : [];
-        setQuotes(updatedArray);
-      } else {
-        setInProgress(null);
-
-        const updatedArray = quotes
-          ? quotes.filter((quotesToFilter) => quotesToFilter.id !== quote?.id)
-          : [];
-        setQuotes(updatedArray);
-        setQuote(null);
-        console.log("error, response not ok. ", response);
-        console.log(
-          "Det finns ingen databas att koppla upp till, inga ändringar sparas"
-        );
-      }
-    }
-    deleteQuote();
+    const updatedArray = quotes
+      ? quotes.filter((quotesToFilter) => quotesToFilter.id !== quote?.id)
+      : [];
+    setQuotes(updatedArray);
+    setQuote(null);
   }
 
   return (
