@@ -35,7 +35,7 @@ function QuoteSection({
     setFormButton({ ...formButton, [button]: false });
   }
 
-  function handleQuoteForm(e: React.FormEvent<HTMLFormElement>): void {
+  function handleAddQuote(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
     if (quotes) {
       const id = quotes.length + 1;
@@ -55,7 +55,7 @@ function QuoteSection({
     });
   };
 
-  function sendUpdate(e: React.FormEvent<HTMLFormElement>): void {
+  function handleUpdateQuote(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
     if (quotes) {
       const quoteToUpdate = quotes.find(
@@ -77,11 +77,13 @@ function QuoteSection({
   }
 
   function handleDelete(): void {
+    setInProgress(quote ? quote.id : false);
     const updatedArray = quotes
       ? quotes.filter((quotesToFilter) => quotesToFilter.id !== quote?.id)
       : [];
     setQuotes(updatedArray);
     setQuote(null);
+    setInProgress(null);
   }
 
   return (
@@ -103,7 +105,7 @@ function QuoteSection({
         <div className={formButton.add ? "showForm" : "hideForm"}>
           <Form
             formButton={formButton}
-            handleQuoteForm={handleQuoteForm}
+            handleAddQuote={handleAddQuote}
             handleChange={handleChange}
             form={form}
             setInProgress={setInProgress}
@@ -115,7 +117,7 @@ function QuoteSection({
         <div className={formButton.update ? "showUpdate" : "hideUpdate"}>
           <Form
             formButton={formButton}
-            sendUpdate={sendUpdate}
+            handleUpdateQuote={handleUpdateQuote}
             handleChange={handleChange}
             form={form}
             setInProgress={setInProgress}
@@ -143,6 +145,7 @@ function QuoteSection({
         setFormButton={setFormButton}
         formButton={formButton}
         handleDelete={handleDelete}
+        quote={quote}
         setQuote={setQuote}
       />
     </>

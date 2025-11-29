@@ -3,8 +3,8 @@ import type { FormButtonType } from "../../lib/type";
 
 type FormProps = {
   formButton: FormButtonType;
-  handleQuoteForm?: (e: React.FormEvent<HTMLFormElement>) => void;
-  sendUpdate?: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleAddQuote?: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleUpdateQuote?: (e: React.FormEvent<HTMLFormElement>) => void;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -16,8 +16,8 @@ type FormProps = {
 
 function Form({
   formButton,
-  handleQuoteForm,
-  sendUpdate,
+  handleAddQuote: handleQuoteForm,
+  handleUpdateQuote: sendUpdate,
   handleChange,
   form,
   setInProgress,

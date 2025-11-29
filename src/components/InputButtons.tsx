@@ -1,12 +1,13 @@
 import type { FormButtonType } from "../../lib/type";
 import type { QuoteType } from "../../lib/type";
-import { useQuoteContext } from "../context/QuoteContext";
+// import { useQuoteContext } from "../context/QuoteContext";
 
 type InputButtonsProps = {
   formButton: FormButtonType;
   setFormButton: React.Dispatch<React.SetStateAction<FormButtonType>>;
   inProgress: number | boolean | null;
   handleDelete: () => void;
+  quote: QuoteType | null;
   setQuote: React.Dispatch<React.SetStateAction<QuoteType | null>>;
 };
 
@@ -15,10 +16,9 @@ function InputButtons({
   setFormButton,
   inProgress,
   handleDelete,
+  quote,
   setQuote,
 }: InputButtonsProps) {
-  const { quoteDisplay } = useQuoteContext();
-
   const handleClickAdd = () => {
     setFormButton({ add: !formButton.add, update: false });
     setQuote(null);
@@ -61,7 +61,7 @@ function InputButtons({
         className="button"
         onClick={handleDelete}
       >
-        {quoteDisplay && inProgress === quoteDisplay.id ? (
+        {quote && inProgress === quote.id ? (
           <div className="loader"></div>
         ) : (
           "Radera citat"
