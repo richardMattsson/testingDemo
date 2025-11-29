@@ -1,0 +1,212 @@
+#root {
+  /* max-width: 1280px; */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* padding: 2rem; */
+}
+
+.app-main {
+  /* margin-top: 20px; */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main-light {
+  /* margin-top: 20px; */
+  background-color: #fffefe;
+  color: #242424;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  background-color: #242424;
+}
+
+.navbar-light {
+  color: #242424;
+  background-color: #fff;
+}
+
+.Home-header {
+  background-color: #242424;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  /* border: 1px solid white; */
+}
+
+.Home-h1 {
+  text-align: center;
+  font-size: 32px;
+}
+
+.Home-form {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 15px;
+
+  /* border: 1px solid white; */
+}
+
+.Home-article {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 15px;
+  padding: 15px;
+  justify-content: center;
+}
+
+.BookCard-container {
+  background-color: #242424;
+  width: 250px;
+  border: 3px solid #094e7c;
+  border-radius: 15px;
+  padding: 15px;
+}
+.Bookdetail-container {
+  width: 600px;
+  /* border: 3px solid #094e7c; */
+
+  border-radius: 15px;
+  padding: 15px;
+}
+.bookcard-header {
+  cursor: pointer;
+}
+.bookcard-header:hover {
+  color: #3498db;
+}
+.hideElement {
+  display: none;
+}
+button {
+  min-width: 150px;
+  border-radius: 6px;
+  border: 1px solid grey;
+  padding: 1em 1em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.buttonFocus {
+  background-color: grey;
+  color: #1a1a1a;
+  font-weight: 600;
+  border: 2px solid #1a1a1a;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.button:hover {
+  background-color: rgba(138, 134, 134, 0.281);
+}
+
+.flexContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+#input-buttons-div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hideForm {
+  display: none;
+}
+
+.showForm {
+  display: flex;
+  justify-content: center;
+}
+.hideUpdate {
+  display: none;
+}
+
+.showUpdate {
+  display: flex;
+  justify-content: center;
+}
+
+.loader {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid white;
+  border-top: 3px solid #3498db;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.flexContainer {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.flexSection {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  border: 1px solid grey;
+}
+.flexDiv {
+  padding: 1rem;
+}
+
+@media (max-width: 482px) {
+  button {
+    border-radius: 4px;
+    margin: 10px;
+    padding: 0.4em 0.6em;
+    font-size: 0.6em;
+    font-weight: 500;
+    min-width: 70px;
+    cursor: pointer;
+    transition: border-color 0.25s;
+  }
+  .flexContainer {
+    flex-direction: column;
+  }
+  .flexSection {
+    width: 100%;
+    border: none;
+  }
+  .flexDiv {
+    padding: 1rem;
+  }
+  .showForm {
+    width: 100px;
+  }
+  #root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0;
+  }
+}
