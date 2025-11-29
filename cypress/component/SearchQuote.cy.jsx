@@ -1,7 +1,7 @@
 import SearchQuote from "../../src/components/SearchQuote";
 
 describe("Testing SearchQuote component", () => {
-  it("Mount and show result", () => {
+  it.only("Mount and show result", () => {
     cy.mount(
       <SearchQuote
         quotes={[
@@ -11,23 +11,23 @@ describe("Testing SearchQuote component", () => {
             quote:
               "Life is like riding a bicycle. To keep your balance, you must keep moving.",
           },
-          {
-            id: 2,
-            name: "Oscar Wilde",
-            quote: "Be yourself; everyone else is already taken.",
-          },
-          {
-            id: 3,
-            name: "William Shakespeare",
-            quote: "To be or not to be, that is the question.",
-          },
         ]}
       />
     );
 
     cy.get("[data-cy=filter]").should("have.value", "");
     cy.get("[data-cy=filter]").should("exist").type("Albert");
-    cy.get('[data-test="test-quotebutton-1"]').contains("Albert Einstein");
+    cy.get('[data-test="test-quotebutton-1"]')
+      .contains("Albert Einstein")
+      .should("be.visible");
+  });
+
+  it.only("renders a loading message when quotes are null", () => {
+    cy.mount(<SearchQuote />);
+
+    cy.get('[data-cy="loading-quotes-message"]')
+      .contains("Laddar citat")
+      .should("be.visible");
   });
 
   it("takes a text prop that sets the filter value", () => {

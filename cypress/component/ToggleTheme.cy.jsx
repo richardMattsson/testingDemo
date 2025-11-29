@@ -3,8 +3,7 @@ import ToggleTheme from "../../src/components/ToggleTheme";
 describe("ToggleTheme.cy.jsx", () => {
   it("exists", () => {
     cy.mount(<ToggleTheme theme={"dark"} updateTheme={() => {}} />);
-    cy.get('[data-test="toggle-theme-icon"]').as("toggle");
-    cy.get("@toggle").should("exist");
+    cy.get('[data-test="toggle-theme-icon"]').should("exist");
   });
 
   it("changes color when toggled", () => {

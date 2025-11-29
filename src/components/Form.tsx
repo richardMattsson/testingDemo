@@ -16,8 +16,8 @@ type FormProps = {
 
 function Form({
   formButton,
-  handleAddQuote: handleQuoteForm,
-  handleUpdateQuote: sendUpdate,
+  handleAddQuote,
+  handleUpdateQuote,
   handleChange,
   form,
   setInProgress,
@@ -26,7 +26,7 @@ function Form({
 }: FormProps) {
   return (
     <form
-      onSubmit={formButton.add ? handleQuoteForm : sendUpdate}
+      onSubmit={formButton.add ? handleAddQuote : handleUpdateQuote}
       style={{
         display: "flex",
         flexDirection: "column",
@@ -34,7 +34,7 @@ function Form({
       }}
     >
       <input
-        data-test={"input-name"}
+        data-test={`input-name-${addText}`}
         onChange={handleChange}
         value={form.name}
         name="name"
@@ -47,7 +47,7 @@ function Form({
         }}
       />
       <textarea
-        data-test="textarea-quote"
+        data-test={`textarea-quote-${addText}`}
         onChange={handleChange}
         value={form.quote}
         name="quote"
@@ -62,7 +62,7 @@ function Form({
       />
       <div style={{ display: "flex", justifyContent: "center" }}>
         <button
-          data-test="submit-quote-form"
+          data-test={`submit-form-${addText}`}
           onClick={() => setInProgress(true)}
           type="submit"
           style={{

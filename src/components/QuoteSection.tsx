@@ -57,6 +57,7 @@ function QuoteSection({
 
   function handleUpdateQuote(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
+    setInProgress(null);
     if (quotes) {
       const quoteToUpdate = quotes.find(
         (quoteToUpdate) => quoteToUpdate.name === quote?.name
@@ -110,7 +111,7 @@ function QuoteSection({
             form={form}
             setInProgress={setInProgress}
             inProgress={inProgress}
-            addText="Lägg till"
+            addText="add"
           />
         </div>
 
@@ -122,7 +123,7 @@ function QuoteSection({
             form={form}
             setInProgress={setInProgress}
             inProgress={inProgress}
-            addText="Uppdatera"
+            addText="update"
           />
         </div>
         <section

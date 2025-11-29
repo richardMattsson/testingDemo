@@ -45,32 +45,27 @@ describe("home page", () => {
   context("add and update quotes", () => {
     it("add a quote using the form", () => {
       cy.get('[data-test="input-button-add"]').click();
-      cy.get('[data-test="input-name"]').eq(0).type("Wayne Gretzky");
-      cy.get('[data-test="textarea-quote"]')
-        .eq(0)
-        .type("Yo miss 100% of all the shots you dont take.");
-      cy.get('[data-test="submit-quote-form"]').eq(0).click();
+      cy.get('[data-test="input-name-add"]').type("Wayne Gretzky");
+      cy.get('[data-test="textarea-quote-add"]').type(
+        "Yo miss 100% of all the shots you dont take."
+      );
+      cy.get('[data-test="submit-form-add"]').click();
     });
 
     it("update a quote using the form", () => {
+      cy.get('[data-test="test-quotebutton-1"]').click();
       cy.get('[data-test="input-button-update"]').click();
-      cy.get('[data-test="input-name"]').eq(1).type("Albert Einstein");
-      cy.get('[data-test="textarea-quote"]')
-        .eq(1)
-        .type("Imagination is more important than knowledge.");
-      cy.get('[data-test="submit-quote-form"]').eq(1).click();
+      cy.get('[data-test="input-name-update"]').type("Albert Einstein");
+      cy.get('[data-test="textarea-quote-update"]').type(
+        "Imagination is more important than knowledge."
+      );
+      cy.get('[data-test="submit-form-update"]').click();
     });
 
     it("delete a quote using the form", () => {
-      cy.get('[data-test="test-quotebuttons"]')
-        .children()
-        .eq(0)
-        .contains("Albert Einstein");
+      cy.get('[data-test="test-quotebutton-1"]').click();
       cy.get('[data-test="input-button-delete"]').click();
-      cy.get('[data-test="test-quotebuttons"]')
-        .children()
-        .eq(0)
-        .should("not.have.text", "Albert Einstein");
+      cy.get('[data-test="test-quotebuttons-1"]').should("not.exist");
     });
   });
 

@@ -36,7 +36,7 @@ function SearchQuote({
           gap: 15,
         }}
       >
-        {!quotes && "Laddar citat..."}
+        {!quotes && <p data-cy="loading-quotes-message">"Laddar citat..."</p>}
         {quotes &&
           quotes.map((quote) => (
             <button
