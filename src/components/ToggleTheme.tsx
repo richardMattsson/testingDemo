@@ -10,7 +10,7 @@ type ToggleThemeProps = {
 function ToggleTheme({ theme, updateTheme }: ToggleThemeProps) {
   const [mode, setMode] = useState(theme);
 
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     setMode(mode === "dark" ? "light" : "dark");
     updateTheme(mode === "dark" ? "light" : "dark");
   };

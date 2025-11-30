@@ -10,18 +10,29 @@ function Books() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${inputValue}`)
-      .then((response) => response.json())
-      .then((result) => {
-        setBooks(result.items);
-      });
+    async function getBooks() {
+      try {
+        const response = await fetch(
+          `https://www.googleapis.com/books/v1/volumes?q=${inputValue}`
+        );
+        const books = await response.json();
+        setBooks(books.items);
+      } catch {
+        console.log("Something went wrong fetching books");
+      }
+    }
+    getBooks();
   }
   return (
     <>
       <section className={"Home-header"} aria-labelledby="search-heading">
-        <h1 id="search-heading" className="Home-h1">
-          Sök efter en bok
-        </h1>
+        <h2
+          data-cy="book-search-header"
+          id="search-heading"
+          className="Home-h1"
+        >
+          Hitta en bok
+        </h2>
         <form onSubmit={handleSubmit} method="post" className="Home-form">
           <input
             data-test="test-booksearch"
@@ -29,6 +40,7 @@ function Books() {
             type="text"
             onChange={(e) => setInputValue(e.target.value)}
             value={inputValue}
+            placeholder="title, författare"
             className="Home-input"
           />
 

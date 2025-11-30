@@ -30,6 +30,7 @@ function InputButtons({
 
   return (
     <div
+      data-cy="input-buttons-container"
       id="input-buttons-div"
       style={{
         display: "grid",
@@ -41,7 +42,6 @@ function InputButtons({
       <button
         data-test="input-button-add"
         className={formButton.add ? "buttonFocus" : "button"}
-        accessKey="add"
         onClick={handleClickAdd}
       >
         {formButton.add ? "Stäng formulär" : "Lägg till citat"}
@@ -50,7 +50,6 @@ function InputButtons({
       <button
         data-test="input-button-update"
         className={formButton.update ? "buttonFocus" : "button"}
-        accessKey="update"
         onClick={handleUpdate}
       >
         {formButton.update ? "Stäng formulär" : "Uppdatera citat"}

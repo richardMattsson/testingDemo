@@ -1,6 +1,7 @@
 Feature: Login success
 
-On the account page there is a login form and when I type the correct info and click login I am succefully logged in.
+On the account page there is a login form and when I type the correct info
+and click login I am succefully logged in and returned to the homepage.
 
 Scenario: I am on the account page and want to log in on my account
   Given I have a registered account and fill the correct input 

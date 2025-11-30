@@ -12,5 +12,5 @@ When("I click on the login button", () => {
 });
 
 Then("I dont get logged in and being given a error message", () => {
-  cy.get('[data-test="login-error-message"]');
+  cy.get('[data-test="login-error-message"]').should("be.visible");
 });
