@@ -95,7 +95,6 @@ export function LoginForm({ setUser }: SetUser) {
         const response = await fetch("/database-users.json");
         const users = await response.json();
         setUsers(users);
-        console.log(users);
       } catch {
         console.log("Some error fetching users");
       }
